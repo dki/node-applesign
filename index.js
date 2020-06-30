@@ -40,7 +40,7 @@ class Applesign {
     const tmp = tmpdir();
     const base = path.join(tmp, "applesign");
     const result = path.join(base, uuid.v4());
-    fs.mkdirSync(result, { recursive: true });
+    fs.ensureDirSync(result);
     return result;
   }
 
@@ -810,7 +810,7 @@ async function enumerateTestFiles (dir) {
 }
 
 async function moveFiles (files, sourceDir, destDir) {
-  await fs.mkdir(destDir, { recursive: true });
+  await fs.ensureDir(destDir);
   for (let f of files) {
     const oldName = path.join(sourceDir, f);
     const newName = path.join(destDir, f);
